@@ -1,0 +1,159 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+}
+
+/* Навигационная панель */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff; /* Синий цвет при наведении */
+}
+
+/* Секции */
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0; /* Начальная прозрачность */
+    transition: opacity 0.5s ease;
+}
+
+.section.active {
+    opacity: 1; /* Активные секции становятся видимыми */
+}
+
+/* Контент главной страницы */
+#home .content {
+    display: flex;
+    flex-direction: row; /* Размещаем изображение и текст в одну строку */
+    align-items: center; /* Выравниваем элементы по центру вертикали */
+    justify-content: space-between; /* Добавляем пространство между изображением и текстом */
+    max-width: 1200px; /* Ограничиваем ширину контента */
+    margin: 0 auto; /* Центрируем контент */
+}
+
+/* Изображение */
+.image-container {
+    flex: 1; /* Изображение занимает часть экрана */
+    margin-right: 20px; /* Отступ справа */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Начальная прозрачность */
+    transform: translateX(-50px); /* Изображение начинает движение слева */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.image-container img.visible {
+    opacity: 1; /* Изображение становится видимым */
+    transform: translateX(0); /* Возвращается в нормальное положение */
+}
+
+/* Текстовый контейнер */
+.text-container {
+    flex: 2; /* Текст занимает большую часть экрана */
+    text-align: left; /* Выравниваем текст по левому краю */
+}
+
+.text-container h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    opacity: 0; /* Начальная прозрачность */
+    transform: translateY(20px); /* Текст начинает движение сверху */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.text-container h1.visible {
+    opacity: 1; /* Текст становится видимым */
+    transform: translateY(0); /* Возвращается в нормальное положение */
+}
+
+.text-container p {
+    font-size: 16px;
+    opacity: 0; /* Начальная прозрачность */
+    transform: translateY(20px); /* Текст начинает движение сверху */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.text-container p.visible {
+    opacity: 1; /* Текст становится видимым */
+    transform: translateY(0); /* Возвращается в нормальное положение */
+}
+
+/* Форма */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+input, textarea, button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
