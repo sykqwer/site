@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Минималистичный сайт</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link">Главная</a></li>
+            <li><a href="#about" class="nav-link">О проекте</a></li>
+            <li><a href="#contact" class="nav-link">Контакты</a></li>
+            <li><a href="#end" class="nav-link">Конец</a></li>
+        </ul>
+    </nav>
+
+    <!-- Главная секция -->
+    <section id="home" class="section"> <!-- Укажите URL фото -->
+        <div class="content">
+            <div class="image-container">
+                <img src="anabar.png" alt="Главное фото" class="fade-in"> <!-- Пустой src будет заполнен динамически -->
+            </div>
+            <div class="text-container">
+                <h1 class="fade-in">Добро пожаловать!</h1>
+                <p class="fade-in">
+                    Этот проект создан для демонстрации Туризма в Анабарском Улусе, мы стремимся к простоте.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция "О проекте" -->
+    <section id="about" class="section">
+        <h1>О проекте</h1>
+        <div class="content">
+            <h2>Цели проекта</h2>
+            <p>
+                Создать продукт который покажет Туризм в Анабарском районе.
+            </p>
+        </div>
+    </section>
+
+    <!-- Секция "Контакты" -->
+    <section id="contact" class="section">
+        <h1>Контакты</h1>
+        <p>Свяжитесь с нами через форму ниже:</p>
+        <form>
+            <input type="text" placeholder="Имя" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Сообщение"></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    </section>
+
+    <!-- Секция "Конец" -->
+    <section id="end" class="section">
+        <h1>Конец страницы</h1>
+        <p>Спасибо, что посетили наш сайт!</p>
+    </section>
+
+    <!-- Подключение скрипта -->
+    <script src="script.js"></script>
+</body>
+</html>
