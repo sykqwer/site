@@ -21,11 +21,18 @@ document.querySelectorAll('.nav-link').forEach(link => {
 window.onload = function () {
     document.getElementById('home').classList.add('active');
 
-    // Добавляем класс visible для всех элементов в активной секции
+    // Загрузка изображения из data-image
     const homeSection = document.getElementById('home');
-    if (homeSection) {
-        const elementsToAnimate = homeSection.querySelectorAll('.fade-in');
-        elementsToAnimate.forEach(element => element.classList.add('visible'));
+    const imageContainer = homeSection.querySelector('.image-container img');
+    const imageUrl = homeSection.getAttribute('data-image');
+
+    if (imageContainer && imageUrl) {
+        imageContainer.src = imageUrl; // Устанавливаем src изображения
+        imageContainer.onerror = function () {
+            // Если изображение не загружается, заменяем его заглушкой
+            this.src = "https://via.placeholder.com/400x600"; // Placeholder-изображение
+            console.error("Failed to load image:", imageUrl);
+        };
     }
 };
 
@@ -43,7 +50,7 @@ function checkVisibility() {
             section.classList.remove('active'); // Удаляем класс active
         }
 
-        // Добавляем/удаляем класс visible для анимации
+        // Анимация для изображений и текста внутри секции
         const elementsToAnimate = section.querySelectorAll('.fade-in');
         elementsToAnimate.forEach(element => {
             if (isVisible) {
