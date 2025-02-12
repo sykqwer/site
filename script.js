@@ -1,98 +1,60 @@
-/* Общие стили */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// Плавная прокрутка к секциям
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault(); // Отключаем стандартное поведение ссылки
 
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
-}
+        const targetId = this.getAttribute('href'); // Получаем ID целевой секции
+        const targetSection = document.querySelector(targetId); // Находим секцию
 
-/* Навигационная панель */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-}
+        if (targetSection) {
+            // Плавная прокрутка
+            targetSection.scrollIntoView({ behavior: 'smooth' });
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
+            // Добавляем класс active для текущей секции
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            targetSection.classList.add('active');
+        }
+    });
+});
 
-.nav-link {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
+// Инициализация первой секции как активной
+window.onload = function () {
+    document.getElementById('home').classList.add('active');
 
-.nav-link:hover {
-    color: #007bff; /* Синий цвет при наведении */
-}
-
-/* Секции */
-.section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    opacity: 0; /* Начальная прозрачность */
-    transition: opacity 0.5s ease;
-}
-
-.section.active {
-    opacity: 1; /* Активные секции становятся видимыми */
-}
-
-/* Контент главной страницы */
-#home .content {
-    display: flex;
-    flex-direction: row; /* По умолчанию изображение слева, текст справа */
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Для мобильных устройств */
-@media (max-width: 768px) {
-    #home .content {
-        flex-direction: column; /* Изображение и текст размещаются друг под другом */
-        align-items: center;
+    // Добавляем класс visible для всех элементов в активной секции
+    const homeSection = document.getElementById('home');
+    if (homeSection) {
+        const elementsToAnimate = homeSection.querySelectorAll('.fade-in');
+        elementsToAnimate.forEach(element => element.classList.add('visible'));
     }
+};
 
-    .image-container img {
-        max-width: 100%; /* Изображение адаптируется под экран */
-        height: auto;
-    }
+// Функция для обнаружения видимых элементов
+function checkVisibility() {
+    const sections = document.querySelectorAll('.section'); // Все секции
 
-    .text-container {
-        text-align: center; /* Текст выравнивается по центру */
-    }
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect(); // Получаем координаты секции относительно viewport
+        const isVisible = rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0; // Проверяем видимость
 
-    /* Кнопка скачивания */
-    .download-button {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        font-size: 18px;
-    }
+        if (isVisible) {
+            section.classList.add('active'); // Добавляем класс active
+        } else {
+            section.classList.remove('active'); // Удаляем класс active
+        }
+
+        // Добавляем/удаляем класс visible для анимации
+        const elementsToAnimate = section.querySelectorAll('.fade-in');
+        elementsToAnimate.forEach(element => {
+            if (isVisible) {
+                element.classList.add('visible');
+            } else {
+                element.classList.remove('visible');
+            }
+        });
+    });
 }
+
+// Вызываем checkVisibility при прокрутке и загрузке страницы
+window.addEventListener('scroll', checkVisibility);
+window.addEventListener('load', checkVisibility);
